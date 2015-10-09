@@ -8,12 +8,15 @@
     <title>Cameron Pittman: Portfolio</title>
 
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
+    <!-- OPTIMIZATION: Use javascript to load the web font and move the Javascript to end of html -->
     <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
 
+    <!-- OPTIMIZATION: Minify and inline the css -->
     <!-- build:css inline ../build/css/style.min.css -->
     <link href="css/style.css" rel="stylesheet">
     <!-- /build -->
 
+    <!-- OPTIMIZATION: Add the media="print" to only download css when printing -->
     <link href="css/print.css" rel="stylesheet" media="print">
 
 
@@ -27,6 +30,8 @@
       ga('send', 'pageview');
     </script>
     <script async src="http://www.google-analytics.com/analytics.js"></script>
+
+    <!-- OPTIMIZATION: Inline the javascript after it has been minified by gulp-uglify -->
     <!-- build:js inline ../build/js/perfmatters.min.js -->
     <script async src="js/perfmatters.js"></script>
     <!-- /build -->
@@ -77,17 +82,20 @@
     </footer>
       </div>
   </body>
-<script>
-WebFontConfig = {
-google: {
-families: ['Open Sans:400,700']
-}
-};
 
-  (function(d) {
-    var wf = d.createElement('script'), s = d.scripts[0];
-    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
-    s.parentNode.insertBefore(wf, s);
-  })(document);
-</script>
+  <!-- OPTIMIZATION: Load the webfont asynchronously -->
+  <!-- Javascript code from https://github.com/typekit/webfontloader -->
+  <script>
+    WebFontConfig = {
+      google: {
+        families: ['Open Sans:400,700']
+      }
+    };
+
+    (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+    })(document);
+  </script>
 </html>
